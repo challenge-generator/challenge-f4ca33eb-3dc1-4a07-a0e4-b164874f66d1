@@ -1,0 +1,306 @@
+// Mixins reutilizables para estilos responsivos y maquetación
+// Uso: @include mobile { ... } para aplicar estilos en móvil
+
+// Breakpoints basados en variables de proyecto
+$breakpoint-mobile: 576px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 992px;
+$breakpoint-large-desktop: 1200px;
+
+// Mixin para dispositivos móviles (menor a breakpoint-tablet)
+@mixin mobile {
+  @media only screen and (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+// Mixin para tablets (entre breakpoint-mobile y breakpoint-desktop)
+@mixin tablet {
+  @media only screen and (min-width: $breakpoint-tablet) and (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+
+// Mixin para tablets y abajo (menor a breakpoint-desktop)
+@mixin tablet-down {
+  @media only screen and (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+
+// Mixin para tablets y arriba (mayor o igual a breakpoint-tablet)
+@mixin tablet-up {
+  @media only screen and (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+// Mixin para escritorio (mayor o igual a breakpoint-desktop)
+@mixin desktop {
+  @media only screen and (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+// Mixin para escritorio grande (mayor o igual a breakpoint-large-desktop)
+@mixin large-desktop {
+  @media only screen and (min-width: $breakpoint-large-desktop) {
+    @content;
+  }
+}
+
+// Mixin para rango específico de breakpoints
+@mixin breakpoint-range($min, $max) {
+  @media only screen and (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+// Mixin para container fluido con máximo ancho
+@mixin container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// Mixin para container con ancho máximo según breakpoint
+@mixin container-responsive($max-width: 1140px) {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  
+  @media only screen and (min-width: $breakpoint-tablet) {
+    max-width: 540px;
+  }
+  
+  @media only screen and (min-width: $breakpoint-desktop) {
+    max-width: 720px;
+  }
+  
+  @media only screen and (min-width: $breakpoint-large-desktop) {
+    max-width: $max-width;
+  }
+}
+
+// Mixin para flexbox - dirección en fila
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+// Mixin para flexbox - dirección en columna
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Mixin para centrar elementos con flexbox
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Mixin para espacio entre elementos
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Mixin para flex con wrap
+@mixin flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// Mixin para flex con gap responsivo
+@mixin flex-gap($gap-mobile, $gap-desktop: $gap-mobile) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-mobile;
+  
+  @include desktop {
+    gap: $gap-desktop;
+  }
+}
+
+// Mixin para grid básico
+@mixin grid($columns: 1, $gap: 20px) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+// Mixin para grid responsivo
+@mixin grid-responsive($mobile-columns: 1, $tablet-columns: 2, $desktop-columns: 3, $gap: 20px) {
+  display: grid;
+  grid-template-columns: repeat($mobile-columns, 1fr);
+  gap: $gap;
+  
+  @include tablet {
+    grid-template-columns: repeat($tablet-columns, 1fr);
+  }
+  
+  @include desktop {
+    grid-template-columns: repeat($desktop-columns, 1fr);
+  }
+}
+
+// Mixin para typography responsiva
+@mixin font-size-responsive($mobile-size, $tablet-size: $mobile-size, $desktop-size: $tablet-size) {
+  font-size: $mobile-size;
+  
+  @include tablet {
+    font-size: $tablet-size;
+  }
+  
+  @include desktop {
+    font-size: $desktop-size;
+  }
+}
+
+// Mixin para line-height responsivo
+@mixin line-height-responsive($mobile-height, $desktop-height: $mobile-height) {
+  line-height: $mobile-height;
+  
+  @include desktop {
+    line-height: $desktop-height;
+  }
+}
+
+// Mixin para padding responsivo
+@mixin padding-responsive($mobile-padding, $desktop-padding: $mobile-padding) {
+  padding: $mobile-padding;
+  
+  @include desktop {
+    padding: $desktop-padding;
+  }
+}
+
+// Mixin para margin responsivo
+@mixin margin-responsive($mobile-margin, $desktop-margin: $mobile-margin) {
+  margin: $mobile-margin;
+  
+  @include desktop {
+    margin: $desktop-margin;
+  }
+}
+
+// Mixin para ocultar elementos en móvil
+@mixin hide-on-mobile {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+// Mixin para ocultar elementos en desktop
+@mixin hide-on-desktop {
+  @include desktop {
+    display: none !important;
+  }
+}
+
+// Mixin para mostrar solo en móvil
+@mixin show-on-mobile {
+  display: none !important;
+  
+  @include mobile {
+    display: block !important;
+  }
+}
+
+// Mixin para mostrar solo en desktop
+@mixin show-on-desktop {
+  display: none !important;
+  
+  @include desktop {
+    display: block !important;
+  }
+}
+
+// Mixin para transición suave
+@mixin smooth-transition($property: all, $duration: 0.3s) {
+  transition: $property $duration ease-in-out;
+}
+
+// Mixin para card básico
+@mixin card-base {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  
+  @include smooth-transition(box-shadow);
+  
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Mixin para botón responsivo
+@mixin button-responsive($padding-y: 12px, $padding-x: 24px, $font-size: 16px) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  
+  @include smooth-transition(background-color, transform);
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  @include mobile {
+    padding: ($padding-y * 0.875) ($padding-x * 0.75);
+    font-size: ($font-size * 0.875);
+  }
+}
+
+// Mixin para imagen responsiva
+@mixin responsive-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+// Mixin para overlay oscuro
+@mixin dark-overlay {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+  }
+}
+
+// Mixin para texto truncado con ellipsis
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Mixin para texto multilínea truncada
+@mixin line-clamp($lines: 3) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

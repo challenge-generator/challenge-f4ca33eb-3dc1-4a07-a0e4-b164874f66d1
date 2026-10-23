@@ -1,0 +1,116 @@
+<header class="header">
+  <mat-toolbar class="header__toolbar" color="primary">
+    <div class="header__container">
+      <div class="header__brand">
+        <a routerLink="/" class="header__logo-link">
+          <span class="header__logo-text">ShopOnline</span>
+        </a>
+      </div>
+      
+      <nav class="header__nav" role="navigation" aria-label="Navegación principal">
+        <ul class="header__nav-list">
+          <li class="header__nav-item">
+            <a mat-button 
+               routerLink="/" 
+               routerLinkActive="header__link--active"
+               [routerLinkActiveOptions]="{exact: true}"
+               class="header__link">
+              Inicio
+            </a>
+          </li>
+          <li class="header__nav-item">
+            <a mat-button 
+               routerLink="/products" 
+               routerLinkActive="header__link--active"
+               class="header__link">
+              Productos
+            </a>
+          </li>
+          <li class="header__nav-item">
+            <a mat-button 
+               routerLink="/about" 
+               routerLinkActive="header__link--active"
+               class="header__link">
+              Nosotros
+            </a>
+          </li>
+          <li class="header__nav-item">
+            <a mat-button 
+               routerLink="/contact" 
+               routerLinkActive="header__link--active"
+               class="header__link">
+              Contacto
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="header__actions">
+        <button mat-icon-button 
+                class="header__action-btn" 
+                aria-label="Buscar productos">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-icon-button 
+                class="header__action-btn" 
+                aria-label="Ver carrito de compras">
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+        <button mat-icon-button 
+                class="header__action-btn header__action-btn--menu"
+                aria-label="Abrir menú"
+                (click)="toggleMenu()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-toolbar>
+  
+  <mat-sidenav-container class="header__sidenav-container">
+    <mat-sidenav #sidenav 
+                 [mode]="sidenavMode" 
+                 [opened]="sidenavOpened"
+                 class="header__sidenav"
+                 role="dialog"
+                 aria-label="Menú de navegación móvil">
+      <mat-nav-list class="header__sidenav-list">
+        <a mat-list-item 
+           routerLink="/" 
+           routerLinkActive="header__sidenav-link--active"
+           [routerLinkActiveOptions]="{exact: true}"
+           class="header__sidenav-link"
+           (click)="closeSidenav()">
+          <mat-icon matListItemIcon>home</mat-icon>
+          <span matListItemTitle>Inicio</span>
+        </a>
+        <a mat-list-item 
+           routerLink="/products" 
+           routerLinkActive="header__sidenav-link--active"
+           class="header__sidenav-link"
+           (click)="closeSidenav()">
+          <mat-icon matListItemIcon>store</mat-icon>
+          <span matListItemTitle>Productos</span>
+        </a>
+        <a mat-list-item 
+           routerLink="/about" 
+           routerLinkActive="header__sidenav-link--active"
+           class="header__sidenav-link"
+           (click)="closeSidenav()">
+          <mat-icon matListItemIcon>info</mat-icon>
+          <span matListItemTitle>Nosotros</span>
+        </a>
+        <a mat-list-item 
+           routerLink="/contact" 
+           routerLinkActive="header__sidenav-link--active"
+           class="header__sidenav-link"
+           (click)="closeSidenav()">
+          <mat-icon matListItemIcon>contact_mail</mat-icon>
+          <span matListItemTitle>Contacto</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    
+    <mat-sidenav-content class="header__sidenav-content">
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</header>

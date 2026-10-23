@@ -1,0 +1,183 @@
+<header-component></header-component>
+
+<main class="home-container">
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Bienvenido a Nuestra Tienda Online</h1>
+      <p class="hero-subtitle">
+        Descubre los mejores productos con descuentos exclusivos
+      </p>
+      <button mat-raised-button color="primary" class="hero-cta-button" aria-label="Ver productos">
+        <mat-icon>shopping_bag</mat-icon>
+        Ver Productos
+      </button>
+    </div>
+    <div class="hero-image-container">
+      <img 
+        src="assets/hero-image.jpg" 
+        alt="Productos destacados" 
+        class="hero-image"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <section class="categories-section">
+    <h2 class="section-title">Categorías Populares</h2>
+    <mat-grid-list 
+      [cols]="breakpoint" 
+      rowHeight="200px" 
+      (window:resize)="onResize($event)"
+      class="categories-grid"
+      role="list"
+      aria-label="Categorías de productos"
+    >
+      <mat-grid-tile *ngFor="let category of categories">
+        <mat-card class="category-card">
+          <mat-card-header>
+            <mat-card-title>{{ category.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ category.description }}</p>
+            <span class="product-count">{{ category.productCount }} productos</span>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="primary" [attr.aria-label]="'Ver productos de ' + category.name">
+              EXPLORAR
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </section>
+
+  <section class="featured-products-section">
+    <h2 class="section-title">Productos Destacados</h2>
+    <div class="products-grid" role="list" aria-label="Productos destacados">
+      <article 
+        *ngFor="let product of featuredProducts" 
+        class="product-card"
+        role="listitem"
+      >
+        <div class="product-image-wrapper">
+          <img 
+            [src]="product.image" 
+            [alt]="product.name" 
+            class="product-image"
+            loading="lazy"
+          />
+          <span *ngIf="product.discount" class="discount-badge">
+            -{{ product.discount }}%
+          </span>
+        </div>
+        <div class="product-details">
+          <h3 class="product-name">{{ product.name }}</h3>
+          <p class="product-description">{{ product.description }}</p>
+          <div class="product-price-container">
+            <span class="original-price" *ngIf="product.originalPrice">
+              {{ product.originalPrice | currency }}
+            </span>
+            <span class="current-price">{{ product.price | currency }}</span>
+          </div>
+          <div class="product-actions">
+            <button 
+              mat-mini-fab 
+              color="warn" 
+              aria-label="Añadir a favoritos"
+              class="action-button"
+            >
+              <mat-icon>favorite</mat-icon>
+            </button>
+            <button 
+              mat-raised-button 
+              color="primary" 
+              aria-label="Añadir al carrito"
+              class="add-to-cart-button"
+            >
+              <mat-icon>add_shopping_cart</mat-icon>
+              Añadir
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="promotional-banner-section">
+    <div class="promotional-banner">
+      <div class="banner-content">
+        <h2 class="banner-title">Oferta Especial</h2>
+        <p class="banner-text">
+          Envío gratuito en pedidos superiores a $50
+        </p>
+        <button mat-stroked-button color="accent" class="banner-button">
+          Ver Condiciones
+        </button>
+      </div>
+      <div class="banner-decoration">
+        <mat-icon class="banner-icon">local_shipping</mat-icon>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter-section">
+    <div class="newsletter-container">
+      <h2 class="newsletter-title">Suscríbete a nuestro Newsletter</h2>
+      <p class="newsletter-text">
+        Recibe las últimas ofertas y novedades directamente en tu correo
+      </p>
+      <form class="newsletter-form" (submit)="onNewsletterSubmit($event)">
+        <mat-form-field appearance="outline" class="newsletter-input">
+          <mat-label>Tu correo electrónico</mat-label>
+          <input 
+            matInput 
+            type="email" 
+            placeholder="ejemplo@correo.com"
+            required
+            aria-label="Correo electrónico"
+          />
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit"
+          class="subscribe-button"
+        >
+          Suscribirse
+        </button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3 class="footer-heading">Sobre Nosotros</h3>
+      <p class="footer-text">
+        Somos una tienda online líder en productos de calidad.
+      </p>
+    </div>
+    <div class="footer-section">
+      <h3 class="footer-heading">Enlaces Rápidos</h3>
+      <nav class="footer-nav" aria-label="Enlaces del pie de página">
+        <a mat-button href="/products">Productos</a>
+        <a mat-button href="/about">Acerca de</a>
+        <a mat-button href="/contact">Contacto</a>
+      </nav>
+    </div>
+    <div class="footer-section">
+      <h3 class="footer-heading">Contacto</h3>
+      <p class="footer-text">
+        <mat-icon>phone</mat-icon> +1 234 567 890
+      </p>
+      <p class="footer-text">
+        <mat-icon>email</mat-icon> info@tiendaonline.com
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 Tienda Online. Todos los derechos reservados.</p>
+  </div>
+</footer>

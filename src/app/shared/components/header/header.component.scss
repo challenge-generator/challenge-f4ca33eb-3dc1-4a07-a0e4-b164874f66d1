@@ -1,0 +1,183 @@
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mix;
+@use '../../styles/responsive' as responsive;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: vars.$container-max-width;
+    margin: 0 auto;
+    padding: 0 vars.$spacing-md;
+
+    @include mix.flex-breakpoint-down(sm) {
+      padding: 0 vars.$spacing-sm;
+    }
+  }
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: vars.$primary-color;
+    color: vars.$text-light;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    min-height: 64px;
+
+    @include mix.flex-breakpoint-down(sm) {
+      min-height: 56px;
+    }
+  }
+
+  &__brand {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:focus {
+      outline: 2px solid vars.$accent-color;
+      outline-offset: 2px;
+    }
+  }
+
+  &__logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+
+    @include mix.flex-breakpoint-down(sm) {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__nav {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+
+    @include responsive.breakpoint-down(lg) {
+      display: none;
+    }
+  }
+
+  &__nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: vars.$spacing-xs;
+  }
+
+  &__nav-item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__link {
+    color: vars.$text-light;
+    font-weight: 500;
+    text-decoration: none;
+    padding: vars.$spacing-sm vars.$spacing-md;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &:focus {
+      outline: 2px solid vars.$accent-color;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      background-color: rgba(255, 255, 255, 0.15);
+      font-weight: 600;
+    }
+  }
+
+  &__actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-xs;
+  }
+
+  &__action-btn {
+    color: vars.$text-light;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &:focus {
+      outline: 2px solid vars.$accent-color;
+      outline-offset: 2px;
+    }
+
+    &--menu {
+      display: none;
+
+      @include responsive.breakpoint-down(lg) {
+        display: flex;
+      }
+    }
+  }
+
+  &__sidenav-container {
+    height: 0;
+  }
+
+  &__sidenav {
+    width: 280px;
+    background-color: vars.$background-color;
+    padding-top: vars.$spacing-md;
+
+    @include mix.flex-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+
+  &__sidenav-list {
+    padding: 0;
+  }
+
+  &__sidenav-link {
+    color: vars.$text-dark;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    &--active {
+      background-color: rgba(63, 81, 181, 0.08);
+      color: vars.$primary-color;
+    }
+  }
+
+  &__sidenav-content {
+    background-color: transparent;
+  }
+}
